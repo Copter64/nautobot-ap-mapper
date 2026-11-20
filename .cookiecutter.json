@@ -1,0 +1,30 @@
+{
+    "cookiecutter": {
+        "codeowner_github_usernames": "@Copter64",
+        "full_name": "Chris Sibiski",
+        "email": "copter64@example.com",
+        "github_org": "Copter64",
+        "app_name": "ap_mapper",
+        "verbose_name": "AP Mapper",
+        "app_slug": "ap-mapper",
+        "project_slug": "nautobot-ap-mapper",
+        "repo_url": "https://github.com/Copter64/nautobot-ap-mapper",
+        "base_url": "ap-mapper",
+        "camel_name": "APMapper",
+        "project_short_description": "Wireless AP mapping with floor plan visualization for Nautobot",
+        "model_class_name": "FloorPlan",
+        "open_source_license": "Apache-2.0",
+        "docs_base_url": "https://github.com/Copter64/nautobot-ap-mapper",
+        "docs_app_url": "https://github.com/Copter64/nautobot-ap-mapper",
+        "__commercial": false,
+        "_extensions": [
+            "local_extensions.camel_case_to_kebab",
+            "local_extensions.camel_case_to_words",
+            "local_extensions.NautobotVersions"
+        ],
+        "_template": "https://github.com/nautobot/cookiecutter-nautobot-app.git",
+        "_output_dir": "/home/copter64/git",
+        "_repo_dir": "/home/copter64/.cookiecutters/cookiecutter-nautobot-app/nautobot-app",
+        "_checkout": "nautobot-app-v3.1.4"
+    }
+}

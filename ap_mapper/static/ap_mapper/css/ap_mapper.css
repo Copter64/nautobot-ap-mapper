@@ -1,0 +1,60 @@
+/* AP Mapper CSS */
+
+.apm-hidden {
+    display: none !important;
+}
+
+.apm-panel-padding {
+    padding: 40px;
+}
+
+.apm-map-container {
+    width: 100%;
+    height: 600px;
+    min-height: 400px;
+}
+
+.apm-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.apm-toolbar .badge {
+    background-color: #6c757d;
+}
+
+.apm-marker {
+    background: none;
+    border: none;
+}
+
+.apm-marker-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.apm-marker-tooltip {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.apm-picker-results {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.apm-picker-result:hover {
+    background-color: #f0f4f8;
+}
+
+/* Modal display fix for Bootstrap 5 */
+.modal.show {
+    display: block !important;
+}

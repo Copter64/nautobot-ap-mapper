@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "AP Mapper Configuration",
+    "description": "Configuration options for the AP Mapper Nautobot app.",
+    "properties": {
+        "supported_targets": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of object types that can be placed on maps (app_label.model_name).",
+            "default": [
+                "wireless.wirelessap",
+                "dcim.device",
+                "dcim.rack",
+                "dcim.location"
+            ]
+        },
+        "marker_default_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Default hex color for map markers.",
+            "default": "#0d6efd"
+        },
+        "marker_size": {
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 100,
+            "description": "Size of map markers in pixels.",
+            "default": 30
+        },
+        "background_max_bytes": {
+            "type": "integer",
+            "minimum": 100000,
+            "description": "Maximum file size for background images in bytes.",
+            "default": 5000000
+        },
+        "background_max_dimension": {
+            "type": "integer",
+            "minimum": 100,
+            "description": "Maximum dimension (width or height) for background images in pixels.",
+            "default": 10000
+        }
+    },
+    "additionalProperties": false
+}
