@@ -7,26 +7,36 @@ This document provides an overview of the App including critical information and
 
 ## Description
 
-![Main Page](../media/ss_main_page_light.png#only-light)
-![Main Page](../media/ss_main_page_dark.png#only-dark)
+AP Mapper provides interactive floor plan mapping for wireless access points and network devices within Nautobot. The app allows network engineers to:
+
+- Upload floor plan images (PNG/JPEG/SVG) for sites and locations
+- Drag and drop access points, devices, racks, and other network objects onto the map
+- View placement markers with colors, labels, and coordinates
+- Manage floor plans per location with revision tracking
+
+The app integrates into the Nautobot UI with a "Wireless" tab in the sidebar and adds AP Map tabs to Device and Location detail pages.
 
 ## Audience (User Personas) - Who should use this App?
 
-!!! warning "Developer Note - Remove Me!"
-    Who is this meant for/ who is the common user of this app?
+- **Network Engineers**: Visualize wireless AP placement and coverage during planning and troubleshooting
+- **Site Engineers**: Document physical device locations on floor plans
+- **NOC Operators**: Quickly identify device locations for field dispatch
+- **Nautobot Administrators**: Extend Nautobot with visual mapping capabilities
 
 ## Authors and Maintainers
 
-!!! warning "Developer Note - Remove Me!"
-    Add the team and/or the main individuals maintaining this project. Include historical maintainers as well.
+- **Copter64** (Chris Sibiski) — Primary author and maintainer
 
 ## Nautobot Features Used
 
-!!! warning "Developer Note - Remove Me!"
-    What is shown today in the Installed Apps page in Nautobot. What parts of Nautobot does it interact with, what does it add etc. ?
+AP Mapper integrates with the following Nautobot features:
+
+- **DCIM**: Location, Device, Rack models
+- **Wireless**: WirelessAP model
+- **Extras**: Tags, Custom Fields (via PrimaryModel base)
+- **Content Types**: GenericForeignKey for flexible object placement
 
 ### Extras
 
-!!! warning "Developer Note - Remove Me!"
-    Custom Fields - things like which CFs are created by this app?
-    Jobs - are jobs, if so, which ones, installed by this app?
+- **Custom Fields**: No custom fields are created by this app. It uses the standard Nautobot PrimaryModel base which supports tags and custom fields natively.
+- **Jobs**: No jobs are installed by this app.

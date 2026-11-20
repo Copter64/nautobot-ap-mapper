@@ -2,31 +2,33 @@
 
 Here you will find detailed instructions on how to **install** and **configure** the App within your Nautobot environment.
 
-!!! warning "Developer Note - Remove Me!"
-    Detailed instructions on installing the App. You will need to update this section based on any additional dependencies or prerequisites.
-
 ## Prerequisites
 
 - The app is compatible with Nautobot 3.1.0 and higher.
 - Databases supported: PostgreSQL, MySQL
+- Python 3.10 or higher
 
 !!! note
     Please check the [dedicated page](compatibility_matrix.md) for a full compatibility matrix and the deprecation policy.
 
 ### Access Requirements
 
-!!! warning "Developer Note - Remove Me!"
-    What external systems (if any) it needs access to in order to work.
+AP Mapper has no external system dependencies. It operates entirely within Nautobot using existing models (Location, Device, Rack, WirelessAP) and stores floor plan images as static files.
 
 ## Install Guide
-
-!!! note
-    Apps can be installed from the [Python Package Index](https://pypi.org/) or locally. See the [Nautobot documentation](https://docs.nautobot.com/projects/core/en/stable/user-guide/administration/installation/app-install/) for more details. The pip package name for this app is [`ap-mapper`](https://pypi.org/project/ap-mapper/).
 
 The app is available as a Python package via PyPI and can be installed with `pip`:
 
 ```shell
 pip install ap-mapper
+```
+
+Or from source:
+
+```shell
+git clone https://github.com/Copter64/nautobot-ap-mapper.git
+cd nautobot-ap-mapper
+pip install -e .
 ```
 
 To ensure AP Mapper is automatically re-installed during future upgrades, create a file named `local_requirements.txt` (if not already existing) in the Nautobot root directory (alongside `requirements.txt`) and list the `ap-mapper` package:
@@ -69,13 +71,10 @@ sudo systemctl restart nautobot nautobot-worker nautobot-scheduler
 
 ## App Configuration
 
-!!! warning "Developer Note - Remove Me!"
-    Any configuration required to get the App set up. Edit the table below as per the examples provided.
-
 The app behavior can be controlled with the following list of settings:
 
-| Key     | Example | Default | Description                          |
-| ------- | ------ | -------- | ------------------------------------- |
-| `enable_backup` | `True` | `True` | A boolean to represent whether or not to run backup configurations within the app. |
-| `platform_slug_map` | `{"cisco_wlc": "cisco_aireos"}` | `None` | A dictionary in which the key is the platform slug and the value is what netutils uses in any "network_os" parameter. |
-| `per_feature_bar_width` | `0.15` | `0.15` | The width of the table bar within the overview report |
+| Key | Example | Default | Description |
+| --- | ------- | ------- | ----------- |
+| `supported_targets` | `["wireless.wirelessap", "dcim.device", "dcim.rack", "dcim.location"]` | `["wireless.wirelessap", "dcim.device", "dcim.rack", "dcim.location"]` | List of content types that can be placed on maps. Format: `app_label.model_name`. |
+| `marker_default_color` | `"#0d6efd"` | `"#0d6efd"` | Default color for placement markers (hex color). |
+| `marker_size` | `30` | `30` | Default marker size in pixels. |

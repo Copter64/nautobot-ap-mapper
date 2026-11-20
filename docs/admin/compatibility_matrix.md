@@ -1,8 +1,9 @@
 # Compatibility Matrix
 
-!!! warning "Developer Note - Remove Me!"
-    Explain how the release models of the app and of Nautobot work together, how releases are supported, how features and older releases are deprecated etc.
+AP Mapper follows the Nautobot release model. Each minor version of the app supports the corresponding minor version of Nautobot.
 
 | AP Mapper Version | Nautobot First Support Version | Nautobot Last Support Version |
-| ------------- | -------------------- | ------------- |
-| 1.0.X         | 3.1.0                | 2.99.99        |
+| ----------------- | ----------------------------- | ---------------------------- |
+| 1.0.X             | 3.1.0                         | 3.x.x                        |
+
+The app uses Nautobot 3.x APIs and is not compatible with Nautobot 2.x.
