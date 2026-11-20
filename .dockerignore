@@ -23,4 +23,3 @@ LICENSE
 **/*.log
 **/.vscode/
 invoke*.yml
-tasks.py
