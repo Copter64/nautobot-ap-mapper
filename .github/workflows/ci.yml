@@ -108,6 +108,7 @@ jobs:
           docker run \
             --rm \
             --entrypoint "" \
+            --workdir /source \
             "${{ env.APP_NAME }}/nautobot:${{ matrix.nautobot-version }}-py${{ matrix.python-version }}" \
             bash -c "poetry run invoke pylint"
       - name: "Checking: validate-app-config"
@@ -115,6 +116,7 @@ jobs:
           docker run \
             --rm \
             --entrypoint "" \
+            --workdir /source \
             "${{ env.APP_NAME }}/nautobot:${{ matrix.nautobot-version }}-py${{ matrix.python-version }}" \
             bash -c "poetry run invoke validate-app-config"
 
