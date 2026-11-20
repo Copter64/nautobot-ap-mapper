@@ -1,6 +1,6 @@
 """Template extensions for AP Mapper."""
 
-from nautobot.apps.ui import MenuChooseAction, TemplateExtension
+from nautobot.apps.ui import DistinctViewTab, TemplateExtension
 
 
 class DeviceAPMapTab(TemplateExtension):
@@ -9,19 +9,12 @@ class DeviceAPMapTab(TemplateExtension):
     model = "dcim.device"
 
     object_detail_tabs = [
-        MenuChooseAction(
+        DistinctViewTab(
             tab_id="ap-map",
             label="AP Map",
-            menu=(
-                {
-                    "link": "plugins:ap_mapper:device_ap_map",
-                    "label": "View on Map",
-                    "weight": 100,
-                    "button_class": "btn-primary",
-                    "required_permissions": ["ap_mapper.view_apfloorplan"],
-                },
-            ),
+            url_name="plugins:ap_mapper:device_ap_map",
             weight=800,
+            required_permissions=["ap_mapper.view_apfloorplan"],
         )
     ]
 
@@ -32,19 +25,12 @@ class LocationAPMapTab(TemplateExtension):
     model = "dcim.location"
 
     object_detail_tabs = [
-        MenuChooseAction(
+        DistinctViewTab(
             tab_id="ap-map",
             label="AP Map",
-            menu=(
-                {
-                    "link": "plugins:ap_mapper:location_ap_map",
-                    "label": "View on Map",
-                    "weight": 100,
-                    "button_class": "btn-primary",
-                    "required_permissions": ["ap_mapper.view_apfloorplan"],
-                },
-            ),
+            url_name="plugins:ap_mapper:location_ap_map",
             weight=800,
+            required_permissions=["ap_mapper.view_apfloorplan"],
         )
     ]
 
