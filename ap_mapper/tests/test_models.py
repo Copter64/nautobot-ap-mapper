@@ -1,6 +1,5 @@
 """Test APFloorPlan and ObjectPlacement models."""
 
-from django.contrib.contenttypes.models import ContentType
 from django.db import IntegrityError
 from django.test import tag
 from nautobot.apps.testing import ModelTestCases

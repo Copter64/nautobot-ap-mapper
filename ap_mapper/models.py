@@ -63,12 +63,17 @@ class APFloorPlan(PrimaryModel):
         constraints = [
             models.CheckConstraint(condition=models.Q(logical_width__gte=1), name="ap_mapper_width_gte_1"),
             models.CheckConstraint(condition=models.Q(logical_height__gte=1), name="ap_mapper_height_gte_1"),
-            models.CheckConstraint(condition=models.Q(logical_width__lte=MAX_LOGICAL_SIZE), name="ap_mapper_width_lte_max"),
-            models.CheckConstraint(condition=models.Q(logical_height__lte=MAX_LOGICAL_SIZE), name="ap_mapper_height_lte_max"),
+            models.CheckConstraint(
+                condition=models.Q(logical_width__lte=MAX_LOGICAL_SIZE), name="ap_mapper_width_lte_max"
+            ),
+            models.CheckConstraint(
+                condition=models.Q(logical_height__lte=MAX_LOGICAL_SIZE), name="ap_mapper_height_lte_max"
+            ),
             models.CheckConstraint(condition=models.Q(revision__gte=1), name="ap_mapper_revision_gte_1"),
         ]
 
     def __str__(self):
+        """Return string representation of the floor plan."""
         return f"{self.name or self.location} AP Map"
 
     @property
@@ -77,6 +82,7 @@ class APFloorPlan(PrimaryModel):
         return self.name or str(self.location)
 
     def clean(self):
+        """Validate model fields; enforce location immutability."""
         super().clean()
         if self.present_in_database:
             old = type(self).objects.only("location_id").get(pk=self.pk)
@@ -138,9 +144,11 @@ class ObjectPlacement(PrimaryModel):
         ]
 
     def __str__(self):
+        """Return string representation of the placement."""
         return f"{self.object} on {self.floor_plan} at ({self.x}, {self.y})"
 
     def clean(self):
+        """Validate model fields; enforce immutability and bounds."""
         super().clean()
         if self.present_in_database:
             old = type(self).objects.only("floor_plan_id", "content_type_id", "object_id").get(pk=self.pk)

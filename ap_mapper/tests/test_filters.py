@@ -39,9 +39,7 @@ class ObjectPlacementFilterTestCase(FilterTestCases.FilterTestCase):
 
     queryset = models.ObjectPlacement.objects.all()
     filterset = filters.ObjectPlacementFilterSet
-    generic_filter_tests = (
-        ("id",),
-    )
+    generic_filter_tests = (("id",),)
 
     @classmethod
     def setUpTestData(cls):

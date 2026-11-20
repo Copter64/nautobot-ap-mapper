@@ -40,7 +40,6 @@ def create_placements():
     floorplan1, floorplan2 = create_floorplans()
 
     # Create a device to place
-    manufacturer = dcim_models.Manufacturer.objects.get_or_create(name="Test Mfg")[0]
     role = dcim_models.DeviceRole.objects.get_or_create(name="Test Role")[0]
     device = dcim_models.Device.objects.create(
         name="test-ap-01",

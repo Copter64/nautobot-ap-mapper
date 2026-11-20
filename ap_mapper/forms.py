@@ -2,9 +2,7 @@
 
 from django import forms
 from nautobot.apps.forms import (
-    CommentField,
     DynamicModelChoiceField,
-    DynamicModelMultipleChoiceField,
     MultipleContentTypeField,
     NautobotBulkEditForm,
     NautobotFilterForm,
@@ -89,6 +87,7 @@ class ObjectPlacementForm(NautobotModelForm):
         }
 
     def clean(self):
+        """Resolve content_type from object_type field."""
         cleaned_data = super().clean()
         object_type = cleaned_data.get("object_type")
         object_id = cleaned_data.get("object_id")
@@ -106,9 +105,7 @@ class ObjectPlacementForm(NautobotModelForm):
 class ObjectPlacementBulkEditForm(TagsBulkEditFormMixin, NautobotBulkEditForm):
     """ObjectPlacement bulk edit form."""
 
-    pk = forms.ModelMultipleChoiceField(
-        queryset=models.ObjectPlacement.objects.all(), widget=forms.MultipleHiddenInput
-    )
+    pk = forms.ModelMultipleChoiceField(queryset=models.ObjectPlacement.objects.all(), widget=forms.MultipleHiddenInput)
     color = forms.CharField(required=False, max_length=7)
     label = forms.CharField(required=False, max_length=255)
 

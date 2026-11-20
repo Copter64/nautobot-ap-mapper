@@ -1,6 +1,5 @@
 """Filtering for ap_mapper."""
 
-from django.contrib.contenttypes.models import ContentType
 from nautobot.apps.filters import ContentTypeFilter, MultiValueCharFilter, NameSearchFilterSet, NautobotFilterSet
 
 from ap_mapper import models

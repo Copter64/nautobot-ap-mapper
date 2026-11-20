@@ -1,11 +1,8 @@
 """Views for ap_mapper."""
 
-from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_object_or_404, render
-from nautobot.apps.views import GenericView, NautobotUIViewSet
+from django.shortcuts import get_object_or_404
 from nautobot.apps.ui import ObjectDetailContent, ObjectFieldsPanel, SectionChoices
-from nautobot.core.utils import get_query_param
+from nautobot.apps.views import GenericView, NautobotUIViewSet
 from nautobot.dcim import models as dcim_models
 
 from ap_mapper import filters, forms, models, tables
@@ -73,11 +70,11 @@ class FloorPlanMapView(GenericView):
     template_name = "ap_mapper/ap_map.html"
 
     def get_context_data(self, **kwargs):
+        """Build context with floor plan and placements data."""
         context = super().get_context_data(**kwargs)
 
         # Resolve the floor plan
         floor_plan = None
-        focus_object = None
 
         # Try floor plan pk first
         fp_pk = self.kwargs.get("pk")
@@ -98,16 +95,20 @@ class FloorPlanMapView(GenericView):
         placements = []
         if floor_plan:
             for placement in floor_plan.object_placements.all():
-                placements.append({
-                    "id": str(placement.pk),
-                    "object_id": placement.object_id,
-                    "object_name": placement.display_label,
-                    "object_url": placement.object.get_absolute_url() if hasattr(placement.object, "get_absolute_url") else "",
-                    "object_type": f"{placement.content_type.app_label}.{placement.content_type.model}",
-                    "x": placement.x,
-                    "y": placement.y,
-                    "color": placement.color or "#0d6efd",
-                })
+                placements.append(
+                    {
+                        "id": str(placement.pk),
+                        "object_id": placement.object_id,
+                        "object_name": placement.display_label,
+                        "object_url": placement.object.get_absolute_url()
+                        if hasattr(placement.object, "get_absolute_url")
+                        else "",
+                        "object_type": f"{placement.content_type.app_label}.{placement.content_type.model}",
+                        "x": placement.x,
+                        "y": placement.y,
+                        "color": placement.color or "#0d6efd",
+                    }
+                )
         context["placements"] = placements
 
         # Permissions
@@ -116,7 +117,7 @@ class FloorPlanMapView(GenericView):
         context["has_placement_change_permission"] = self.request.user.has_perm("ap_mapper.change_objectplacement")
 
         # API URLs for the JS
-        context["api_placements_url"] = f"/api/plugins/ap-mapper/placements/"
+        context["api_placements_url"] = "/api/plugins/ap-mapper/placements/"
         context["api_floorplan_url"] = f"/api/plugins/ap-mapper/floor-plans/{floor_plan.pk}/" if floor_plan else ""
         context["csrf_token"] = self.request.META.get("CSRF_COOKIE", "")
 
@@ -147,6 +148,7 @@ class DeviceMapView(FloorPlanMapView):
     """Map view scoped to a Device — finds the map containing this device."""
 
     def get_context_data(self, **kwargs):
+        """Build context for device map view."""
         context = super().get_context_data(**kwargs)
         device = get_object_or_404(dcim_models.Device, pk=self.kwargs.get("device_pk"))
         context["device"] = device
@@ -160,16 +162,20 @@ class DeviceMapView(FloorPlanMapView):
                 # Rebuild placements
                 placements = []
                 for placement in floor_plan.object_placements.all():
-                    placements.append({
-                        "id": str(placement.pk),
-                        "object_id": placement.object_id,
-                        "object_name": placement.display_label,
-                        "object_url": placement.object.get_absolute_url() if hasattr(placement.object, "get_absolute_url") else "",
-                        "object_type": f"{placement.content_type.app_label}.{placement.content_type.model}",
-                        "x": placement.x,
-                        "y": placement.y,
-                        "color": placement.color or "#0d6efd",
-                    })
+                    placements.append(
+                        {
+                            "id": str(placement.pk),
+                            "object_id": placement.object_id,
+                            "object_name": placement.display_label,
+                            "object_url": placement.object.get_absolute_url()
+                            if hasattr(placement.object, "get_absolute_url")
+                            else "",
+                            "object_type": f"{placement.content_type.app_label}.{placement.content_type.model}",
+                            "x": placement.x,
+                            "y": placement.y,
+                            "color": placement.color or "#0d6efd",
+                        }
+                    )
                 context["placements"] = placements
             except models.APFloorPlan.DoesNotExist:
                 pass

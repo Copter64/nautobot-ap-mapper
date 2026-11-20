@@ -1,4 +1,4 @@
-{% extends 'generic/object_detail.html' %}
+{% extends "generic/object_detail.html" %}
 {% load static %}
 
 {% block content %}
@@ -10,11 +10,11 @@
             {% if has_edit_permission %}
                 <div class="pull-right">
                     {% if not is_edit_mode %}
-                        <button id="btn-apm-edit" class="btn btn-primary btn-sm"><i class="mdi mdi-pencil"></i> Edit Map</button>
+                        <button type="button" id="btn-apm-edit" class="btn btn-primary btn-sm"><i class="mdi mdi-pencil"></i> Edit Map</button>
                     {% else %}
-                        <button id="btn-apm-add-object" class="btn btn-secondary btn-sm"><i class="mdi mdi-map-marker-plus"></i> Add Object</button>
-                        <button id="btn-apm-save" class="btn btn-primary btn-sm"><i class="mdi mdi-content-save"></i> Save</button>
-                        <button id="btn-apm-cancel" class="btn btn-secondary btn-sm"><i class="mdi mdi-cancel"></i> Cancel</button>
+                        <button type="button" id="btn-apm-add-object" class="btn btn-secondary btn-sm"><i class="mdi mdi-map-marker-plus"></i> Add Object</button>
+                        <button type="button" id="btn-apm-save" class="btn btn-primary btn-sm"><i class="mdi mdi-content-save"></i> Save</button>
+                        <button type="button" id="btn-apm-cancel" class="btn btn-secondary btn-sm"><i class="mdi mdi-cancel"></i> Cancel</button>
                     {% endif %}
                 </div>
             {% endif %}
@@ -30,7 +30,7 @@
         <!-- Error -->
         <div id="apm-error" class="text-center apm-panel-padding apm-hidden">
             <p id="apm-error-message" class="text-danger"></p>
-            <button id="btn-apm-reload" class="btn btn-primary mt-2">Reload</button>
+            <button type="button" id="btn-apm-reload" class="btn btn-primary mt-2">Reload</button>
         </div>
         <!-- No map -->
         <div id="apm-no-map" class="text-center apm-panel-padding apm-hidden">

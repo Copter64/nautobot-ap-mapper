@@ -25,7 +25,16 @@ class APFloorPlanTable(BaseTable):
 
     class Meta(BaseTable.Meta):
         model = models.APFloorPlan
-        fields = ("pk", "location", "name", "logical_width", "logical_height", "has_background", "placement_count", "actions")
+        fields = (
+            "pk",
+            "location",
+            "name",
+            "logical_width",
+            "logical_height",
+            "has_background",
+            "placement_count",
+            "actions",
+        )
         default_columns = ("pk", "location", "name", "has_background", "placement_count", "actions")
 
 
