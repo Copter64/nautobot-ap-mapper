@@ -21,6 +21,7 @@ class TestAPFloorPlan(ModelTestCases.BaseModelTestCase):
         fixtures.create_floorplans()
 
     def test_create_floorplan_minimal(self):
+        # pylint: disable=no-member
         site = dcim_models.Site.objects.create(name="Minimal Site")
         location = dcim_models.Location.objects.create(name="Minimal Loc", site=site)
         fp = models.APFloorPlan.objects.create(

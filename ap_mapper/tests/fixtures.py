@@ -8,6 +8,7 @@ from ap_mapper.models import APFloorPlan, ObjectPlacement
 
 def create_site_and_location():
     """Create a site and location for floor plan tests."""
+    # pylint: disable=no-member
     site = dcim_models.Site.objects.create(name="Test Site")
     location = dcim_models.Location.objects.create(name="Test Location", site=site)
     return site, location
@@ -15,7 +16,8 @@ def create_site_and_location():
 
 def create_floorplans():
     """Create APFloorPlan objects for tests."""
-    site, location = create_site_and_location()
+    # pylint: disable=no-member
+    _site, location = create_site_and_location()
     site2, location2 = create_site_and_location()
     dcim_models.Site.objects.filter(name="Test Site").update(name="Test Site 2")
     dcim_models.Location.objects.filter(name="Test Location", site=site2).update(name="Test Location 2")
@@ -37,7 +39,8 @@ def create_floorplans():
 
 def create_placements():
     """Create ObjectPlacement objects for tests."""
-    floorplan1, floorplan2 = create_floorplans()
+    # pylint: disable=no-member
+    floorplan1, _floorplan2 = create_floorplans()
 
     # Create a device to place
     role = dcim_models.DeviceRole.objects.get_or_create(name="Test Role")[0]

@@ -15,6 +15,7 @@ class APFloorPlanFormTest(FormTestCases.BaseFormTestCase):
 
     @classmethod
     def setUpTestData(cls):
+        # pylint: disable=no-member
         cls.site = dcim_models.Site.objects.create(name="Form Test Site")
         cls.location = dcim_models.Location.objects.create(name="Form Test Loc", site=cls.site)
 

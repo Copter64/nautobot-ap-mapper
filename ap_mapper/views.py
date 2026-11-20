@@ -71,6 +71,7 @@ class FloorPlanMapView(GenericView):
 
     def get_context_data(self, **kwargs):
         """Build context with floor plan and placements data."""
+        # pylint: disable-next=no-member
         context = super().get_context_data(**kwargs)
 
         # Resolve the floor plan
@@ -131,7 +132,7 @@ class FloorPlanMapView(GenericView):
 
     def get_supported_types(self):
         """Return the list of supported object types for placement."""
-        from nautobot.apps.utils import get_app_settings_or_config
+        from nautobot.apps.config import get_app_settings_or_config
 
         supported = get_app_settings_or_config("ap_mapper", "supported_targets")
         if not supported:

@@ -6,6 +6,7 @@ from nautobot.apps.ui import DistinctViewTab, TemplateExtension
 class DeviceAPMapTab(TemplateExtension):
     """Add an 'AP Map' tab to the Device detail view."""
 
+    # pylint: disable=abstract-method
     model = "dcim.device"
 
     object_detail_tabs = [
@@ -22,6 +23,7 @@ class DeviceAPMapTab(TemplateExtension):
 class LocationAPMapTab(TemplateExtension):
     """Add an 'AP Map' tab to the Location detail view."""
 
+    # pylint: disable=abstract-method
     model = "dcim.location"
 
     object_detail_tabs = [

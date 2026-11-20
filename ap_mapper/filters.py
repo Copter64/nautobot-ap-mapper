@@ -10,7 +10,7 @@ class APFloorPlanFilterSet(NameSearchFilterSet, NautobotFilterSet):
 
     class Meta:
         model = models.APFloorPlan
-        fields = ["location", "name", "description", "logical_width", "logical_height"]
+        fields = "__all__"
 
 
 class ObjectPlacementFilterSet(NameSearchFilterSet, NautobotFilterSet):
@@ -22,4 +22,4 @@ class ObjectPlacementFilterSet(NameSearchFilterSet, NautobotFilterSet):
 
     class Meta:
         model = models.ObjectPlacement
-        fields = ["floor_plan", "x", "y", "color", "label"]
+        fields = "__all__"

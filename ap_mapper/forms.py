@@ -24,15 +24,7 @@ class APFloorPlanForm(NautobotModelForm):
 
     class Meta:
         model = models.APFloorPlan
-        fields = [
-            "location",
-            "name",
-            "description",
-            "logical_width",
-            "logical_height",
-            "background",
-            "tags",
-        ]
+        fields = "__all__"
         widgets = {
             "background": forms.ClearableFileInput(attrs={"accept": "image/png,image/jpeg,image/svg+xml"}),
         }
@@ -81,7 +73,7 @@ class ObjectPlacementForm(NautobotModelForm):
 
     class Meta:
         model = models.ObjectPlacement
-        fields = ["floor_plan", "object_type", "object_id", "x", "y", "color", "label", "tags"]
+        fields = "__all__"
         widgets = {
             "object_id": forms.HiddenInput(),
         }

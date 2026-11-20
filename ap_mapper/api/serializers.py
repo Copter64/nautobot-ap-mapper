@@ -14,6 +14,8 @@ class APFloorPlanSerializer(NautobotModelSerializer, TaggedModelSerializerMixin)
 
     class Meta:
         model = models.APFloorPlan
+        # Keep explicit fields to include SerializerMethodField entries.
+        # pylint: disable-next=nb-use-fields-all
         fields = [
             "id",
             "url",
@@ -52,6 +54,8 @@ class ObjectPlacementSerializer(NautobotModelSerializer, TaggedModelSerializerMi
 
     class Meta:
         model = models.ObjectPlacement
+        # Keep explicit fields to include SerializerMethodField entries.
+        # pylint: disable-next=nb-use-fields-all
         fields = [
             "id",
             "url",
