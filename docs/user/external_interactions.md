@@ -23,20 +23,20 @@ External systems can interact with AP Mapper via the Nautobot REST API endpoints
 AP Mapper exposes the following REST API endpoints under `/api/plugins/ap-mapper/`:
 
 - **Floor Plans**: `/api/plugins/ap-mapper/floor-plans/`
-  - `GET`: List all floor plans (supports filtering by location)
-  - `POST`: Create a new floor plan
-  - `GET /<pk>/`: Get a specific floor plan
-  - `PUT /<pk>/`: Update a floor plan
-  - `PATCH /<pk>/`: Partially update a floor plan
-  - `DELETE /<pk>/`: Delete a floor plan and its placements
+    - `GET`: List all floor plans (supports filtering by location)
+    - `POST`: Create a new floor plan
+    - `GET /<pk>/`: Get a specific floor plan
+    - `PUT /<pk>/`: Update a floor plan
+    - `PATCH /<pk>/`: Partially update a floor plan
+    - `DELETE /<pk>/`: Delete a floor plan and its placements
 
 - **Object Placements**: `/api/plugins/ap-mapper/object-placements/`
-  - `GET`: List all placements (supports filtering by floor_plan, content_type)
-  - `POST`: Create a new placement
-  - `GET /<pk>/`: Get a specific placement
-  - `PUT /<pk>/`: Update a placement (coordinates, color, label)
-  - `PATCH /<pk>/`: Partially update a placement
-  - `DELETE /<pk>/`: Delete a placement
+    - `GET`: List all placements (supports filtering by floor_plan, content_type)
+    - `POST`: Create a new placement
+    - `GET /<pk>/`: Get a specific placement
+    - `PUT /<pk>/`: Update a placement (coordinates, color, label)
+    - `PATCH /<pk>/`: Partially update a placement
+    - `DELETE /<pk>/`: Delete a placement
 
 ### Example: Create a placement via curl
 
