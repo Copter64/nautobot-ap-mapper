@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from nautobot.apps.views import GenericView, NautobotUIViewSet
 from nautobot.apps.ui import ObjectDetailContent, ObjectFieldsPanel, SectionChoices
 from nautobot.core.utils import get_query_param
-from nautobot.dcim.models import Device, Location
+from nautobot.dcim import models as dcim_models
 
 from ap_mapper import filters, forms, models, tables
 from ap_mapper.api import serializers
@@ -148,7 +148,7 @@ class DeviceMapView(FloorPlanMapView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        device = get_object_or_404(Device, pk=self.kwargs.get("device_pk"))
+        device = get_object_or_404(dcim_models.Device, pk=self.kwargs.get("device_pk"))
         context["device"] = device
 
         # If no floor plan resolved, try to find one via the device's location

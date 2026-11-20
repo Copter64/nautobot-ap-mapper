@@ -10,7 +10,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 from nautobot.apps.models import PrimaryModel
-from nautobot.dcim.models import Location
+from nautobot.core.constants import CHARFIELD_MAX_LENGTH
+from nautobot.dcim import models as dcim_models
 
 HEX_COLOR_RE = re.compile(r"^#[0-9A-Fa-f]{6}$")
 validate_hex_color = RegexValidator(HEX_COLOR_RE, "Enter a valid hex color (e.g. #RRGGBB).")
@@ -26,17 +27,17 @@ class APFloorPlan(PrimaryModel):
     """
 
     location = models.OneToOneField(
-        Location,
+        to=dcim_models.Location,
         on_delete=models.CASCADE,
         related_name="ap_mapper_floor_plan",
         help_text="The Location that owns this floor plan map.",
     )
     name = models.CharField(
-        max_length=255,
+        max_length=CHARFIELD_MAX_LENGTH,
         blank=True,
         help_text="Optional display name for this floor plan (defaults to Location name).",
     )
-    description = models.CharField(max_length=255, blank=True)
+    description = models.CharField(max_length=CHARFIELD_MAX_LENGTH, blank=True)
     logical_width = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(MAX_LOGICAL_SIZE)],
         help_text="Map canvas width in pixels (or logical units).",
@@ -113,7 +114,7 @@ class ObjectPlacement(PrimaryModel):
         help_text="Optional hex color override (#RRGGBB) for this marker.",
     )
     label = models.CharField(
-        max_length=255,
+        max_length=CHARFIELD_MAX_LENGTH,
         blank=True,
         help_text="Optional display label override (defaults to object name).",
     )

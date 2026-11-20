@@ -2,15 +2,16 @@
 
 from django import forms
 from nautobot.apps.forms import (
-    ContentTypeModelMultipleChoiceField,
+    CommentField,
     DynamicModelChoiceField,
+    DynamicModelMultipleChoiceField,
+    MultipleContentTypeField,
     NautobotBulkEditForm,
     NautobotFilterForm,
     NautobotModelForm,
-    TagFilter,
     TagsBulkEditFormMixin,
 )
-from nautobot.dcim.models import Location
+from nautobot.dcim import models as dcim_models
 
 from ap_mapper import models
 
@@ -19,7 +20,7 @@ class APFloorPlanForm(NautobotModelForm):
     """APFloorPlan creation/edit form."""
 
     location = DynamicModelChoiceField(
-        queryset=Location.objects.all(),
+        queryset=dcim_models.Location.objects.all(),
         help_text="The Location that owns this floor plan.",
     )
 
@@ -57,7 +58,7 @@ class APFloorPlanFilterForm(NautobotFilterForm):
     field_order = ["q", "location", "name"]
 
     q = forms.CharField(required=False, label="Search", help_text="Search within Name.")
-    location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False, label="Location")
+    location = DynamicModelChoiceField(queryset=dcim_models.Location.objects.all(), required=False, label="Location")
     name = forms.CharField(required=False, label="Name")
 
 
@@ -123,8 +124,7 @@ class ObjectPlacementFilterForm(NautobotFilterForm):
 
     q = forms.CharField(required=False, label="Search")
     floor_plan = DynamicModelChoiceField(queryset=models.APFloorPlan.objects.all(), required=False)
-    object_type = ContentTypeModelMultipleChoiceField(
-        queryset=None,
+    object_type = MultipleContentTypeField(
         required=False,
         label="Object Type",
     )

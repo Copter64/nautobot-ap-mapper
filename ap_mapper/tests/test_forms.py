@@ -1,18 +1,22 @@
 """Test AP Mapper forms."""
 
-from django.test import TestCase
-from nautobot.dcim.models import Location, Site
+from django.test import tag
+from nautobot.apps.testing import FormTestCases
+from nautobot.dcim import models as dcim_models
 
 from ap_mapper import forms
 
 
-class APFloorPlanFormTest(TestCase):
+@tag("unit")
+class APFloorPlanFormTest(FormTestCases.BaseFormTestCase):
     """Test APFloorPlan forms."""
+
+    form = forms.APFloorPlanForm
 
     @classmethod
     def setUpTestData(cls):
-        cls.site = Site.objects.create(name="Form Test Site")
-        cls.location = Location.objects.create(name="Form Test Loc", site=cls.site)
+        cls.site = dcim_models.Site.objects.create(name="Form Test Site")
+        cls.location = dcim_models.Location.objects.create(name="Form Test Loc", site=cls.site)
 
     def test_specifying_all_fields_success(self):
         form = forms.APFloorPlanForm(

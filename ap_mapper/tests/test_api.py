@@ -1,11 +1,13 @@
 """Unit tests for ap_mapper API."""
 
+from django.test import tag
 from nautobot.apps.testing import APIViewTestCases
 
 from ap_mapper import models
 from ap_mapper.tests import fixtures
 
 
+@tag("unit")
 class APFloorPlanAPIViewTest(APIViewTestCases.APIViewTestCase):
     """Test the API viewsets for APFloorPlan."""
 

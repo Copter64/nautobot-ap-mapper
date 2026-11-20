@@ -1,11 +1,13 @@
 """Unit tests for views."""
 
+from django.test import tag
 from nautobot.apps.testing import ViewTestCases
 
 from ap_mapper import models
 from ap_mapper.tests import fixtures
 
 
+@tag("unit")
 class APFloorPlanViewTest(ViewTestCases.PrimaryObjectViewTestCase):
     """Test the APFloorPlan views."""
 

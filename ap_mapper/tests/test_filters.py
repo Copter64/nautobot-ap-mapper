@@ -1,11 +1,13 @@
 """Test APFloorPlan Filter."""
 
+from django.test import tag
 from nautobot.apps.testing import FilterTestCases
 
 from ap_mapper import filters, models
 from ap_mapper.tests import fixtures
 
 
+@tag("unit")
 class APFloorPlanFilterTestCase(FilterTestCases.FilterTestCase):
     """APFloorPlan Filter Test Case."""
 
@@ -31,6 +33,7 @@ class APFloorPlanFilterTestCase(FilterTestCases.FilterTestCase):
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 0)
 
 
+@tag("unit")
 class ObjectPlacementFilterTestCase(FilterTestCases.FilterTestCase):
     """ObjectPlacement Filter Test Case."""
 

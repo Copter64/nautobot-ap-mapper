@@ -12,7 +12,11 @@ class APFloorPlanTable(BaseTable):
     pk = ToggleColumn()
     location = tables.Column(linkify=True)
     name = tables.Column(linkify=True, verbose_name="Map Name")
-    background = tables.BooleanColumn(verbose_name="Has BG", accessor="background")
+    has_background = tables.BooleanColumn(
+        accessor="background",
+        verbose_name="Has BG",
+        empty_values=(),
+    )
     placement_count = tables.Column(verbose_name="Objects")
     actions = ButtonsColumn(
         models.APFloorPlan,
@@ -21,8 +25,8 @@ class APFloorPlanTable(BaseTable):
 
     class Meta(BaseTable.Meta):
         model = models.APFloorPlan
-        fields = ("pk", "location", "name", "logical_width", "logical_height", "background", "placement_count", "actions")
-        default_columns = ("pk", "location", "name", "background", "placement_count", "actions")
+        fields = ("pk", "location", "name", "logical_width", "logical_height", "has_background", "placement_count", "actions")
+        default_columns = ("pk", "location", "name", "has_background", "placement_count", "actions")
 
 
 class ObjectPlacementTable(BaseTable):
