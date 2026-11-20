@@ -10,7 +10,9 @@ class APFloorPlanFilterSet(NameSearchFilterSet, NautobotFilterSet):
 
     class Meta:
         model = models.APFloorPlan
-        fields = "__all__"
+        # Exclude 'background' (FileField — django-filter can't handle it).
+        # pylint: disable-next=nb-use-fields-all
+        fields = ["location", "name", "description", "logical_width", "logical_height"]
 
 
 class ObjectPlacementFilterSet(NameSearchFilterSet, NautobotFilterSet):
@@ -22,4 +24,5 @@ class ObjectPlacementFilterSet(NameSearchFilterSet, NautobotFilterSet):
 
     class Meta:
         model = models.ObjectPlacement
-        fields = "__all__"
+        # pylint: disable-next=nb-use-fields-all
+        fields = ["floor_plan", "x", "y", "color", "label"]
