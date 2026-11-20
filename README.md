@@ -1,66 +1,63 @@
 # AP Mapper
 
-<!--
-Developer Note - Remove Me!
-
-The README will have certain links/images broken until the PR is merged into `develop`. Update the GitHub links with whichever branch you're using (main etc.) if different.
-
-The logo of the project is a placeholder (docs/images/icon-ap-mapper.png) - please replace it with your app icon, making sure it's at least 200x200px and has a transparent background!
-
-To avoid extra work and temporary links, make sure that publishing docs (or merging a PR) is done at the same time as setting up the docs site on RTD, then test everything.
--->
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Copter64/nautobot-ap-mapper/develop/docs/images/icon-ap-mapper.png" class="logo" height="200px">
+  <img src="https://raw.githubusercontent.com/Copter64/nautobot-ap-mapper/main/docs/images/icon-ap-mapper.png" class="logo" height="200px">
   <br>
   <a href="https://github.com/Copter64/nautobot-ap-mapper/actions"><img src="https://github.com/Copter64/nautobot-ap-mapper/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/Copter64/nautobot-ap-mapper/"><img src="https://readthedocs.org/projects/nautobot-app-ap-mapper/badge/"></a>
-  <a href="https://pypi.org/project/ap-mapper/"><img src="https://img.shields.io/pypi/v/ap-mapper"></a>
-  <a href="https://pypi.org/project/ap-mapper/"><img src="https://img.shields.io/pypi/dm/ap-mapper"></a>
   <br>
   An <a href="https://networktocode.com/nautobot-apps/">App</a> for <a href="https://nautobot.com/">Nautobot</a>.
 </p>
 
 ## Overview
 
-> Developer Note: Add a long (2-3 paragraphs) description of what the App does, what problems it solves, what functionality it adds to Nautobot, what external systems it works with etc.
+AP Mapper provides interactive floor plan mapping for wireless access points and network devices within Nautobot. The app allows network engineers to upload floor plan images for sites and locations, then drag and drop access points, devices, racks, and other network objects onto the map for visual placement.
 
-### Screenshots
+Key features:
 
-> Developer Note: Add any representative screenshots of the App in action. These images should also be added to the `docs/user/app_use_cases.md` section.
+- **Floor Plan Management**: Upload floor plan images (PNG/JPEG/SVG) per location with configurable logical dimensions and revision tracking
+- **Interactive Map**: Leaflet.js-powered map with drag-and-drop placement of network objects
+- **Flexible Object Support**: Place any Nautobot object type — WirelessAPs, Devices, Racks, or custom types — via GenericForeignKey
+- **Visual Markers**: Color-coded markers with labels and custom colors for easy identification
+- **API Support**: Full REST API for creating, updating, and querying floor plans and placements
+- **UI Integration**: Adds a "Wireless" tab to the Nautobot sidebar and AP Map tabs on Device and Location detail pages
 
-> Developer Note: Place the files in the `docs/images/` folder and link them using only full URLs from GitHub, for example: `![Overview](https://raw.githubusercontent.com/Copter64/nautobot-ap-mapper/develop/docs/images/app-overview.png)`. This absolute static linking is required to ensure the README renders properly in GitHub, the docs site, and any other external sites like PyPI.
-
-More screenshots can be found in the [Using the App](https://github.com/Copter64/nautobot-ap-mapper/user/app_use_cases/) page in the documentation. Here's a quick overview of some of the app's added functionality:
-
-![](https://raw.githubusercontent.com/Copter64/nautobot-ap-mapper/develop/docs/images/placeholder.png)
-
-## Try it out!
-
-> Developer Note: Only keep this section if appropriate. Update link to correct sandbox.
-
-This App is installed in the Nautobot Community Sandbox found over at [demo.nautobot.com](https://demo.nautobot.com/)!
-
-> For a full list of all the available always-on sandbox environments, head over to the main page on [networktocode.com](https://www.networktocode.com/nautobot/sandbox-environments/).
+The app is designed for wireless network planning and troubleshooting — quickly see where your access points are physically located, identify coverage gaps, and visualize network topology on a per-floor basis.
 
 ## Documentation
 
-Full documentation for this App can be found over on the [Nautobot Docs](https://github.com/Copter64/nautobot-ap-mapper) website:
+Full documentation for this App can be found in the [docs folder](https://github.com/Copter64/nautobot-ap-mapper/tree/main/docs):
 
-- [User Guide](https://github.com/Copter64/nautobot-ap-mapper/user/app_overview/) - Overview, Using the App, Getting Started.
-- [Administrator Guide](https://github.com/Copter64/nautobot-ap-mapper/admin/install/) - How to Install, Configure, Upgrade, or Uninstall the App.
-- [Developer Guide](https://github.com/Copter64/nautobot-ap-mapper/dev/contributing/) - Extending the App, Code Reference, Contribution Guide.
-- [Release Notes / Changelog](https://github.com/Copter64/nautobot-ap-mapper/admin/release_notes/).
-- [Frequently Asked Questions](https://github.com/Copter64/nautobot-ap-mapper/user/faq/).
+- [User Guide](https://github.com/Copter64/nautobot-ap-mapper/tree/main/docs/user) - Overview, Getting Started, Use Cases, FAQ.
+- [Administrator Guide](https://github.com/Copter64/nautobot-ap-mapper/tree/main/docs/admin) - How to Install, Configure, Upgrade, or Uninstall the App.
+- [Developer Guide](https://github.com/Copter64/nautobot-ap-mapper/tree/main/docs/dev) - Extending the App, Code Reference, Development Environment, Contribution Guide.
+- [Release Notes](https://github.com/Copter64/nautobot-ap-mapper/tree/main/docs/admin/release_notes).
 
 ### Contributing to the Documentation
 
-You can find all the Markdown source for the App documentation under the [`docs`](https://github.com/Copter64/nautobot-ap-mapper/tree/develop/docs) folder in this repository. For simple edits, a Markdown capable editor is sufficient: clone the repository and edit away.
+You can find all the Markdown source for the App documentation under the [`docs`](https://github.com/Copter64/nautobot-ap-mapper/tree/main/docs) folder in this repository. For simple edits, a Markdown capable editor is sufficient: clone the repository and edit away.
 
-If you need to view the fully-generated documentation site, you can build it with [MkDocs](https://www.mkdocs.org/). A container hosting the documentation can be started using the `invoke` commands (details in the [Development Environment Guide](https://github.com/Copter64/nautobot-ap-mapper/dev/dev_environment/#docker-development-environment)) on [http://localhost:8001](http://localhost:8001). Using this container, as your changes to the documentation are saved, they will be automatically rebuilt and any pages currently being viewed will be reloaded in your browser.
+If you need to view the fully-generated documentation site, you can build it with [MkDocs](https://www.mkdocs.org/). A container hosting the documentation can be started using the `invoke` commands (details in the [Development Environment Guide](https://github.com/Copter64/nautobot-ap-mapper/blob/main/docs/dev/dev_environment.md)). Using this container, as your changes to the documentation are saved, they will be automatically rebuilt and any pages currently being viewed will be reloaded in your browser.
 
 Any PRs with fixes or improvements are very welcome!
 
+## Installation
+
+Quick install via Poetry:
+
+```bash
+poetry add ap-mapper
+```
+
+Or from source:
+
+```bash
+git clone https://github.com/Copter64/nautobot-ap-mapper.git
+cd nautobot-ap-mapper
+pip install -e .
+```
+
+Add `ap_mapper` to your Nautobot `PLUGINS` list and run `python nautobot-server migrate`. See the [Installation Guide](https://github.com/Copter64/nautobot-ap-mapper/blob/main/docs/admin/install.md) for full details.
+
 ## Questions
 
-For any questions or comments, please check the [FAQ](https://github.com/Copter64/nautobot-ap-mapper/user/faq/) first. Feel free to also swing by the [Network to Code Slack](https://networktocode.slack.com/) (channel `#nautobot`), sign up [here](http://slack.networktocode.com/) if you don't have an account.
+For any questions or comments, please check the [FAQ](https://github.com/Copter64/nautobot-ap-mapper/blob/main/docs/user/faq.md) first. Feel free to also open an issue on the [GitHub repository](https://github.com/Copter64/nautobot-ap-mapper/issues).
