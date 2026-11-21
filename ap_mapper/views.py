@@ -1,6 +1,6 @@
 """Views for ap_mapper."""
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from nautobot.apps.ui import ObjectDetailContent, ObjectFieldsPanel, SectionChoices
 from nautobot.apps.views import GenericView, NautobotUIViewSet
 from nautobot.dcim import models as dcim_models
@@ -69,10 +69,13 @@ class FloorPlanMapView(GenericView):
 
     template_name = "ap_mapper/ap_map.html"
 
+    def get(self, request, **kwargs):
+        """Render the map view."""
+        return render(request, self.template_name, self.get_context_data(**kwargs))
+
     def get_context_data(self, **kwargs):
         """Build context with floor plan and placements data."""
-        # pylint: disable-next=no-member
-        context = super().get_context_data(**kwargs)
+        context = {}
 
         # Resolve the floor plan
         floor_plan = None
@@ -91,6 +94,9 @@ class FloorPlanMapView(GenericView):
                 floor_plan = None
 
         context["floor_plan"] = floor_plan
+
+        # Location ID for the "Create Floor Plan" link
+        context["location_id"] = floor_plan.location_id if floor_plan else ""
 
         # Build placements data for the JS
         placements = []
@@ -126,7 +132,9 @@ class FloorPlanMapView(GenericView):
         context["placement_picker_form"] = forms.PlacementPickerForm()
 
         # Supported object types for the picker
-        context["supported_types"] = self.get_supported_types()
+        supported = self.get_supported_types()
+        context["supported_types"] = supported
+        context["supported_type_options"] = [(t, t.split(".")[-1].replace("_", " ").title()) for t in supported]
 
         return context
 

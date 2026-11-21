@@ -26,14 +26,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "custom_validators",
-                    models.JSONField(
-                        blank=True,
-                        default=list,
-                        editable=False,
-                    ),
-                ),
-                (
                     "created",
                     models.DateTimeField(
                         auto_now_add=True,
@@ -127,14 +119,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "custom_validators",
-                    models.JSONField(
-                        blank=True,
-                        default=list,
-                        editable=False,
-                    ),
-                ),
-                (
                     "created",
                     models.DateTimeField(
                         auto_now_add=True,
@@ -151,7 +135,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "object_id",
-                    models.PositiveIntegerField(),
+                    models.UUIDField(db_index=True),
                 ),
                 (
                     "x",

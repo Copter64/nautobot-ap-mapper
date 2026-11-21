@@ -1,4 +1,4 @@
-{% extends "generic/object_detail.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
@@ -36,7 +36,7 @@
         <div id="apm-no-map" class="text-center apm-panel-padding apm-hidden">
             <p class="text-muted mb-3">No floor plan map exists for this location.</p>
             {% if has_edit_permission %}
-                <a href="{% url 'plugins:ap_mapper:apfloorplan_add' %}?location={{ floor_plan.location.id if floor_plan else '' }}"
+                <a href="{% url 'plugins:ap_mapper:apfloorplan_add' %}?location={{ location_id|default:'' }}"
                    class="btn btn-primary">Create Floor Plan</a>
             {% endif %}
         </div>
@@ -57,8 +57,8 @@
                 <div class="mb-3">
                     <label for="apm-object-type" class="form-label">Object Type</label>
                     <select id="apm-object-type" class="form-select">
-                        {% for type in supported_types %}
-                            <option value="{{ type }}">{{ type|replace:"."|title }}</option>
+                        {% for type, display in supported_type_options %}
+                            <option value="{{ type }}">{{ display }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -107,7 +107,7 @@
 {{ floor_plan.pk|default:''|json_script:"apm-floorplan-id" }}
 {{ floor_plan.logical_width|default:0|json_script:"apm-map-width" }}
 {{ floor_plan.logical_height|default:0|json_script:"apm-map-height" }}
-{{ floor_plan.background.url|default:''|json_script:"apm-background-url" }}
+{% if floor_plan.background %}{{ floor_plan.background.url|json_script:"apm-background-url" }}{% else %}{{ ''|json_script:"apm-background-url" }}{% endif %}
 {{ placements|json_script:"apm-placements" }}
 {{ has_edit_permission|json_script:"apm-edit-permission" }}
 {{ api_placements_url|json_script:"apm-api-placements-url" }}

@@ -1,6 +1,9 @@
 """API serializers for ap_mapper."""
 
+from django.contrib.contenttypes.models import ContentType
 from nautobot.apps.api import NautobotModelSerializer, TaggedModelSerializerMixin
+from nautobot.core.api import ContentTypeField
+from nautobot.dcim.models import Location as DCIMLocation
 from rest_framework import serializers
 
 from ap_mapper import models
@@ -9,7 +12,11 @@ from ap_mapper import models
 class APFloorPlanSerializer(NautobotModelSerializer, TaggedModelSerializerMixin):
     """APFloorPlan Serializer."""
 
-    location = serializers.SerializerMethodField()
+    location = serializers.PrimaryKeyRelatedField(
+        queryset=DCIMLocation.objects.all(),
+        required=True,
+    )
+    location_display = serializers.SerializerMethodField()
     placement_count = serializers.IntegerField(read_only=True)
 
     class Meta:
@@ -20,6 +27,7 @@ class APFloorPlanSerializer(NautobotModelSerializer, TaggedModelSerializerMixin)
             "id",
             "url",
             "location",
+            "location_display",
             "name",
             "description",
             "logical_width",
@@ -34,7 +42,7 @@ class APFloorPlanSerializer(NautobotModelSerializer, TaggedModelSerializerMixin)
         ]
         read_only_fields = ["revision"]
 
-    def get_location(self, obj):
+    def get_location_display(self, obj):
         """Return location reference data."""
         return {"id": obj.location.id, "url": obj.location.get_absolute_url(), "name": str(obj.location)}
 
@@ -48,7 +56,13 @@ class APFloorPlanSerializer(NautobotModelSerializer, TaggedModelSerializerMixin)
 class ObjectPlacementSerializer(NautobotModelSerializer, TaggedModelSerializerMixin):
     """ObjectPlacement Serializer."""
 
-    floor_plan = serializers.SerializerMethodField()
+    floor_plan = serializers.PrimaryKeyRelatedField(
+        queryset=models.APFloorPlan.objects.all(),
+        required=True,
+    )
+    floor_plan_display = serializers.SerializerMethodField()
+    content_type = ContentTypeField(queryset=ContentType.objects.all(), required=True)
+    object_id = serializers.UUIDField(required=True)
     object_type = serializers.SerializerMethodField()
     object = serializers.SerializerMethodField()
 
@@ -60,6 +74,7 @@ class ObjectPlacementSerializer(NautobotModelSerializer, TaggedModelSerializerMi
             "id",
             "url",
             "floor_plan",
+            "floor_plan_display",
             "content_type",
             "object_id",
             "object",
@@ -74,7 +89,7 @@ class ObjectPlacementSerializer(NautobotModelSerializer, TaggedModelSerializerMi
             "last_updated",
         ]
 
-    def get_floor_plan(self, obj):
+    def get_floor_plan_display(self, obj):
         """Return floor plan reference data."""
         return {"id": obj.floor_plan.id, "url": obj.floor_plan.get_absolute_url(), "name": str(obj.floor_plan)}
 

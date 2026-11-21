@@ -109,7 +109,7 @@ class ObjectPlacement(PrimaryModel):
         help_text="The floor plan this placement belongs to.",
     )
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, related_name="ap_mapper_placements")
-    object_id = models.PositiveIntegerField()
+    object_id = models.UUIDField(db_index=True)
     object = GenericForeignKey("content_type", "object_id")
     x = models.PositiveIntegerField(help_text="X coordinate (pixels from left edge).")
     y = models.PositiveIntegerField(help_text="Y coordinate (pixels from top edge).")
